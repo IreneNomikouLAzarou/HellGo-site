@@ -8,36 +8,42 @@ html
   <style>
     :root {
       --color-primary: #0b1b2b;
-      --color-accent1: #2e8b57;
-      --color-accent2: #d49f2a;
       --color-text: #111;
       --color-bg: #fff;
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color: var(--color-text); background: var(--color-bg); }
-    header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.25rem; border-bottom:1px solid #eee; }
+
+    /* Header */
+    header { display:flex; align-items:center; justify-content:space-between;
+             padding:1rem 1.25rem; border-bottom:1px solid #eee; }
     .brand { display:flex; align-items:center; gap:1rem; }
-    .brand img { height: 56px; width:auto; }
+    .brand img { height: 40px; width:auto; }
     .brand-title { font-weight:700; font-size:1.1rem; }
-    .lang-switch { display:flex; gap:.25rem; }
-    .lang-switch button {
-      padding:.5rem 1rem; border:1px solid var(--color-primary); background:#fff; color:var(--color-primary);
-      border-radius:6px; cursor:pointer; font-weight:600;
-    }
-    nav.main-nav { display:flex; gap:1rem; padding:0.5rem 1rem; border-bottom:1px solid #eee; }
-    nav.main-nav a { text-decoration:none; color:var(--color-primary); font-weight:700; padding:0.25rem 0.5rem; }
+
+    .lang-switch { display:flex; gap:.5rem; }
+    .lang-switch button { padding:.4rem .8rem; border:1px solid var(--color-primary);
+                          background:#fff; color:var(--color-primary);
+                          border-radius:6px; cursor:pointer; font-weight:700; }
+
+    /* Tabs */
+    nav.main-nav { display:flex; gap:1rem; padding:.5rem 1rem; border-bottom:1px solid #eee; }
+    nav.main-nav button.tab-btn { background:transparent; border:0; font-weight:700; cursor:pointer; padding:.25rem .5rem; }
+    nav.main-nav button.tab-btn.active { border-bottom:2px solid var(--color-primary); }
+
     main { padding:1rem; }
+
     .tab { display:none; }
     .tab.active { display:block; }
 
-    /* Καλύπτει και εικόνες/πλάνα μέσα στα tabs */
-    .hero { display:flex; gap:2rem; align-items:center; padding:1rem 0; }
-    .hero img { width: 100%; max-width: 520px; height: auto; border-radius:8px; }
-
+    /* Simple content blocks for visuals */
+    .hero { display:flex; gap:2rem; align-items: center; margin:1rem 0; }
+    .hero img { max-width:480px; width:100%; height:auto; border-radius:6px; }
+    .cta { display:inline-block; padding:.6rem 1rem; background:#2e8b57; color:#fff; text-decoration:none; border-radius:6px; font-weight:700; margin-top:.5rem; }
   </style>
 </head>
 <body>
-  <!-- Header -->
+
   <header>
     <div class="brand" aria-label="Branding">
       <img src="assets/logo.png" alt="Logo: Hellenic Goldsmithing Observatory" />
@@ -45,114 +51,130 @@ html
     </div>
 
     <div class="lang-switch" aria-label="Language switch">
-      <button type="button" onclick="setLang('el')">GR</button>
-      <button type="button" onclick="setLang('en')">EN</button>
+      <button onclick="setLang('el')">GR</button>
+      <button onclick="setLang('en')">EN</button>
     </div>
   </header>
 
-  <!-- Main Tabs (greek + english, but only one set shown at a time) -->
-  <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-    <!-- Ελληνικά -->
-    <a href="#home-el" data-lang="el" class="tab-link" data-target="home-el">Αρχική</a>
-    <a href="#about-el" data-lang="el" class="tab-link" data-target="about-el">Σχετικά</a>
-    <a href="#research-el" data-lang="el" class="tab-link" data-target="research-el">Έρευνα</a>
-    <a href="#contact-el" data-lang="el" class="tab-link" data-target="contact-el">Επικοινωνία</a>
+  <!-- Main Tabs -->
+  <nav class="main-nav" aria-label="Main navigation" id="main-nav" data-lang="el">
+    <!-- Greek labels (default) -->
+    <button class="tab-btn" data-target="home-el" onclick="openTab('home-el')">Αρχική</button>
+    <button class="tab-btn" data-target="about-el" onclick="openTab('about-el')">Σχετικά</button>
+    <button class="tab-btn" data-target="research-el" onclick="openTab('research-el')">Έρευνα</button>
+    <button class="tab-btn" data-target="contact-el" onclick="openTab('contact-el')">Επικοινωνία</button>
 
-    <!-- Αγγλικά (κρυμμένα αρχικά) -->
-    <a href="#home-en" data-lang="en" class="tab-link" data-target="home-en" style="display:none;">Home</a>
-    <a href="#about-en" data-lang="en" class="tab-link" data-target="about-en" style="display:none;">About</a>
-    <a href="#research-en" data-lang="en" class="tab-link" data-target="research-en" style="display:none;">Research</a>
-    <a href="#contact-en" data-lang="en" class="tab-link" data-target="contact-en" style="display:none;">Contact</a>
+    <!-- English labels (hidden unless EN is active) -->
+    <button class="tab-btn" data-target="home-en" onclick="openTab('home-en')" style="display:none;">Home</button>
+    <button class="tab-btn" data-target="about-en" onclick="openTab('about-en')" style="display:none;">About</button>
+    <button class="tab-btn" data-target="research-en" onclick="openTab('research-en')" style="display:none;">Research</button>
+    <button class="tab-btn" data-target="contact-en" onclick="openTab('contact-en')" style="display:none;">Contact</button>
   </nav>
 
-  <!-- Content -->
   <main id="content" role="main">
-
-    <!-- Ελληνικά sections (el) -->
+    <!-- Ελληνικά tabs -->
     <section id="home-el" class="tab active" aria-label="Αρχική Ελληνικά">
       <div class="hero">
-        <div class="text">
+        <div>
           <h1>ΕΛΛΗΝΙΚΟ ΠΑΡΑΤΗΡΗΤΗΡΙΟ ΑΡΓΥΡΟΧΡΥΣΟΧΟΪΑΣ ΚΑΙ ΚΟΣΜΗΜΑΤΟΠΟΙΙΑΣ</h1>
-          <p>Ένας χώρος έρευνας για το ελληνικό κόσμημα...</p>
+          <p>Ένας χώρος έρευνας για το ελληνικό κόσμημα που χαρτογραφεί το σύστημα πολιτισμού, οικονομίας και τεχνικής εκπαίδευσης στην αργυροχρυσοχοΐα, σε διάλογο με τις διεθνείς και εγχώριες τάσεις.</p>
           <a class="cta" href="#about-el">Μάθετε περισσότερα →</a>
         </div>
         <img src="assets/jewelry1.jpg" alt="Κοσμήματα σε εργαστήριο" />
       </div>
     </section>
 
-    <section id="home-en" class="tab" aria-label="Home English">
+    <section id="about-el" class="tab" aria-label="Σχετικά Ελληνικά">
+      <h2>Τι είναι το Παρατηρητήριο</h2>
+      <p>Το Ελληνικό Παρατηρητήριο Αργυροχρυσοχοΐας και Κοσμηματοποιίας (ΕΛΠΑΚ) αποτελεί μια ανεξάρτητη πρωτοβουλία...</p>
+    </section>
+
+    <section id="research-el" class="tab" aria-label="Έρευνα Ελληνικά">
+      <h2>Έρευνα & Δράσεις</h2>
+      <p>Μελέτες / Studies (Ελληνικά)</p>
+    </section>
+
+    <section id="contact-el" class="tab" aria-label="Επικοινωνία Ελληνικά">
+      <h2>Επικοινωνία</h2>
+      <p>Email: info@example.org</p>
+    </section>
+
+    <!-- Αγγλικά tabs (hidden by default) -->
+    <section id="home-en" class="tab" aria-label="Home English" style="display:none;">
       <div class="hero">
-        <div class="text">
+        <div>
           <h1>HELLENIC GOLDSMITHING OBSERVATORY</h1>
-          <p>A research space dedicated to Greek jewelry...</p>
+          <p>A research space dedicated to Greek jewelry that maps the interconnected system of culture, the economy, and technical education in silversmithing and goldsmithing, in dialogue with international and local trends.</p>
           <a class="cta" href="#about-en">Learn more →</a>
         </div>
         <img src="assets/jewelry1.jpg" alt="Jewelry in studio" />
       </div>
     </section>
 
-    <!-- Σχετικά / About -->
-    <section id="about-el" class="tab" aria-label="Σχετικά Ελληνικά">
-      <h2>Τι είναι το Παρατηρητήριο</h2>
-      <p>Το Ελληνικό Παρατηρητήριο Αργυροχρυσοχοΐας και Κοσμηματοποιίας (ΕΛΠΑΚ) αποτελεί...</p>
-      <!-- περισσότερα περιεχόμενα -->
-    </section>
-
-    <section id="about-en" class="tab" aria-label="About English">
+    <section id="about-en" class="tab" aria-label="About English" style="display:none;">
       <h2>What is the Observatory</h2>
       <p>The Hellenic Goldsmithing Observatory (HElGO) is an independent initiative...</p>
-      <!-- more content -->
     </section>
 
-    <!-- Έρευνα -->
-    <section id="research-el" class="tab" aria-label="Έρευνα Ελληνικά">
-      <h2>Έρευνα & Δράσεις</h2>
-      <p>Μελέτες / Studies (Ελληνικά)</p>
-    </section>
-
-    <section id="research-en" class="tab" aria-label="Research English">
+    <section id="research-en" class="tab" aria-label="Research English" style="display:none;">
       <h2>Research & Activities</h2>
       <p>Studies (English)</p>
     </section>
 
-    <!-- Επικοινωνία / Contact -->
-    <section id="contact-el" class="tab" aria-label="Επικοινωνία Ελληνικά">
-      <h2>Επικοινωνία</h2>
-      <p>Email: info@example.org</p>
-    </section>
-
-    <section id="contact-en" class="tab" aria-label="Contact English">
+    <section id="contact-en" class="tab" aria-label="Contact English" style="display:none;">
       <h2>Contact</h2>
       <p>Email: info@example.org</p>
     </section>
-
   </main>
 
   <script>
-    // Ενα απλό toggle γλώσσας. Ανοίγει μόνο τα tabs της επιλεγμένης γλώσσας.
+    // Simple tab switcher: show only the active tab
+    function openTab(targetId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      const el = document.getElementById(targetId);
+      if (el) el.classList.add('active');
+      // Optional: update URL hash
+      history.replaceState(null, '', '#' + targetId);
+    }
+
     function setLang(lang) {
-      // Εμφάνιση/κάλυψη tabs
-      document.querySelectorAll('.tab').forEach(t => t.style.display = 'none');
-      // Εμφάνιση των αντίστοιχων ελληνικών/αγγλικών sections
+      // Swap language blocks: Greek vs English nav items and sections
+      const greekItems = document.querySelectorAll('nav.main-nav button[data-target^="home-el"], nav.main-nav button[data-target^="about-el"], nav.main-nav button[data-target^="research-el"], nav.main-nav button[data-target^="contact-el"]');
+      const englishItems = document.querySelectorAll('nav.main-nav button[data-target^="home-en"], nav.main-nav button[data-target^="about-en"], nav.main-nav button[data-target^="research-en"], nav.main-nav button[data-target^="contact-en"]');
+
       if (lang === 'el') {
-        document.querySelectorAll('#home-el, #about-el, #research-el, #contact-el').forEach(n => n.style.display = 'block');
-        // show Greek nav labels, hide English ones
-        document.querySelectorAll('#main-nav a[data-lang="el"]').forEach(a => a.style.display = '');
-        document.querySelectorAll('#main-nav a[data-lang="en"]').forEach(a => a.style.display = 'none');
+        greekItems.forEach(b => b.style.display = '');
+        englishItems.forEach(b => b.style.display = 'none');
+        // Show Greek sections, hide English sections
+        document.getElementById('home-el').style.display = 'block';
+        document.getElementById('home-en').style.display = 'none';
+        document.getElementById('about-el').style.display = 'block';
+        document.getElementById('about-en').style.display = 'none';
+        document.getElementById('research-el').style.display = 'block';
+        document.getElementById('research-en').style.display = 'none';
+        document.getElementById('contact-el').style.display = 'block';
+        document.getElementById('contact-en').style.display = 'none';
       } else {
-        document.querySelectorAll('#home-en, #about-en, #research-en, #contact-en').forEach(n => n.style.display = 'block');
-        document.querySelectorAll('#main-nav a[data-lang="el"]').forEach(a => a.style.display = 'none');
-        document.querySelectorAll('#main-nav a[data-lang="en"]').forEach(a => a.style.display = '');
+        greekItems.forEach(b => b.style.display = 'none');
+        englishItems.forEach(b => b.style.display = '');
+        document.getElementById('home-el').style.display = 'none';
+        document.getElementById('home-en').style.display = 'block';
+        document.getElementById('about-el').style.display = 'none';
+        document.getElementById('about-en').style.display = 'block';
+        document.getElementById('research-el').style.display = 'none';
+        document.getElementById('research-en').style.display = 'block';
+        document.getElementById('contact-el').style.display = 'none';
+        document.getElementById('contact-en').style.display = 'block';
       }
       localStorage.setItem('siteLang', lang);
     }
 
-    // Init
+    // Init on load
     document.addEventListener('DOMContentLoaded', () => {
       const saved = localStorage.getItem('siteLang') || 'el';
       setLang(saved);
-      // Ενεργοποίηση πρώτου tab ανά γλώσσα (προαιρετικά)
-      // Μπορείς να προσθέσεις κώδικα για να ανοίγει ένα συγκεκριμένο tab π.χ. 'home-el'
+      // Open a default tab for the initial language
+      openTab(saved === 'el' ? 'home-el' : 'home-en');
     });
   </script>
 </body>
