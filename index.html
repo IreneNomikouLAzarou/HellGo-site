@@ -1,17 +1,16 @@
 html
-<!-- Header HTML (ready-to-paste) - Purpose: header with logo, language switch, and simple nav -->
 <!doctype html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hellenic Goldsmithing Observatory</title>
-  <meta name="description" content="Header section: logo, language switch, and primary navigation for the site." />
+  <meta name="description" content="Header, navigation and bilingual content for Γενική δομή της ιστοσελίδας." />
   <style>
     :root {
-      --color-primary: #0b1b2b;   /* navy */
-      --color-accent1: #2e8b57;   /* emerald/green */
-      --color-accent2: #d49f2a;   /* amber */
+      --color-primary: #0b1b2b;
+      --color-accent1: #2e8b57;
+      --color-accent2: #d49f2a;
       --color-text: #111;
       --color-bg: #fff;
     }
@@ -26,51 +25,168 @@ html
       padding:.5rem 1rem; border:1px solid var(--color-primary); background:#fff; color:var(--color-primary);
       border-radius:6px; cursor:pointer; font-weight:600;
     }
-    nav a { margin:0 .5rem; text-decoration:none; color:var(--color-primary); font-weight:600; }
+    nav.main-nav { display:flex; gap:1rem; padding:0.5rem 1rem; border-bottom:1px solid #eee; }
+    nav.main-nav a { text-decoration:none; color:var(--color-primary); font-weight:700; padding:0.25rem 0.5rem; }
+    main { padding:1rem; }
+    /* Language blocks: hidden by default; shown when active */
+    .lang-content { display:none; }
+    .lang-content.active { display:block; }
+    /* Simple grid for tab sections (example content) */
+    .hero { display:flex; gap:2rem; align-items:center; padding:1rem 0; }
+    .hero img { width: 100%; max-width: 520px; height: auto; border-radius:8px; }
+    .tagline { max-width: 700px; }
+    .cta { display:inline-block; padding:0.6rem 1rem; background: var(--color-accent1); color:#fff; border-radius:6px; text-decoration:none; font-weight:700; }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <div class="brand" aria-label="Branding">
-      <!-- Replace with your actual logo file path -->
-      <img src="C:\Users\user\Desktop\ΕΛΛΝΙΚΟ ΠΑΡΑΤΗΡΗΤΡΙΟ ΑΡΓΥΡΟΧΡΥΣΟΧΟΙΑΣ\HelGO.png" alt="Logo: Hellenic Goldsmithing Observatory" />
+      <!-- Use a relative path to your logo inside the repo -->
+      <img src="assets/logo.png" alt="Logo: Hellenic Goldsmithing Observatory" />
       <span class="brand-title">Hellenic Goldsmithing Observatory</span>
     </div>
 
-     <div class="lang-switch" aria-label="Language switch">
+    <div class="lang-switch" aria-label="Language switch">
       <button type="button" onclick="setLang('el')">GR</button>
       <button type="button" onclick="setLang('en')">EN</button>
     </div>
   </header>
 
-  <!-- Optional: main navigation (Main Tabs) -->
-  <nav aria-label="Main navigation">
-    <a href="#home">Αρχική</a>
-    <a href="#about">Σχετικά</a>
-    <a href="#research">Έρευνα</a>
-    <a href="#contact">Επαφές</a>
+  <!-- Main Tabs / Navigation -->
+  <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+    <!-- Greek labels -->
+    <a href="#home-el" data-lang="el">Αρχική</a>
+    <a href="#about-el" data-lang="el">Σχετικά</a>
+    <a href="#research-el" data-lang="el">Έρευνα</a>
+    <a href="#contact-el" data-lang="el">Επικοινωνία</a>
+
+    <!-- English labels (hidden by default; shown when EN selected) -->
+    <a href="#home-en" data-lang="en" style="display:none;">Home</a>
+    <a href="#about-en" data-lang="en" style="display:none;">About</a>
+    <a href="#research-en" data-lang="en" style="display:none;">Research</a>
+    <a href="#contact-en" data-lang="en" style="display:none;">Contact us: Επικοινωνία</a>
   </nav>
 
-  
-  <!-- Language toggle script (end of body) -->
+  <!-- Content area with bilingual blocks -->
+  <main id="content" role="main">
+    <!-- Tab 1: Αρχική / Home -->
+    <section id="home-el" class="lang-content active" aria-label="Αρχική">
+      <div class="hero">
+        <div class="text">
+          <h1>ΕΛΛΗΝΙΚΟ ΠΑΡΑΤΗΡΗΤΗΡΙΟ ΑΡΓΥΡΟΧΡΥΣΟΧΟΪΑΣ ΚΑΙ ΚΟΣΜΗΜΑΤΟΠΟΙΙΑΣ</h1>
+          <p class="tagline">Ένας χώρος έρευνας για το ελληνικό κόσμημα που χαρτογραφεί το σύστημα πολιτισμού, οικονομίας και τεχνικής εκπαίδευσης στην αργυροχρυσοχοΐα, σε διάλογο με τις διεθνείς και εγχώριες τάσεις.</p>
+          <a class="cta" href="#about-el">Μάθετε περισσότερα →</a>
+        </div>
+        <img src="assets/jewelry1.jpg" alt="Κοσμήματα σε εργαστήριο" />
+      </div>
+    </section>
+
+    <section id="home-en" class="lang-content" aria-label="Home (English)">
+      <div class="hero">
+        <div class="text">
+          <h1>HELLENIC GOLDSMITHING OBSERVATORY</h1>
+          <p class="tagline">A research space dedicated to Greek jewelry that maps the interconnected system of culture, the economy, and technical education in silversmithing and goldsmithing, in dialogue with international and local trends.</p>
+          <a class="cta" href="#about-en">Learn more →</a>
+        </div>
+        <img src="assets/jewelry1.jpg" alt="Jewelry in studio" />
+      </div>
+    </section>
+
+    <!-- Tab 2: Σχετικά / About -->
+    <section id="about-el" class="lang-content" aria-label="Σχετικά">
+      <h2>Τι είναι το Παρατηρητήριο</h2>
+      <p>Το Ελληνικό Παρατηρητήριο Αργυροχρυσοχοΐας και Κοσμηματοποιίας (ΕΛΠΑΚ) αποτελεί μια ανεξάρτητη πρωτοβουλία που χαρτογραφεί τον σύγχρονο κόσμο του ελληνικού κοσμήματος. Παρατηρούμε και καταγράφουμε τάσεις, δομές και προοπτικές της αργυροχρυσοχοΐας - κοσμηματοποιίας από την ιστορική της διαδρομή, το εξαγωγικό αποτύπωμα και τη σχέση της με τον τουρισμό, μέχρι τις αλλαγές στην εκπαίδευση, τις νέες τεχνολογίες και τους τρόπους με τους οποίους τα κοσμήματα σχεδιάζονται, παράγονται και προωθούνται σήμερα.</p>
+      <h3>Σκοπός / Όραμα</h3>
+      <p>Σκοπός μας είναι να αναδεικνύουμε όσα ήδη συμβαίνουν στον χώρο και να τα συνδέουμε με τις ευρύτερες διεθνείς εξελίξεις. Συνδυάζοντας την οικονομική οπτική και ανάλυση με την εμπειρία μέσα στο εργαστήριο της αργυροχρυσοχοϊας, προσεγγίζουμε τον κλάδο ως ερευνήτριες ενός ζωντανού αλλά συχνά λιγότερο προβεβλημένου οικοσυστήματος...</p>
+      <!-- Additional Greek content can be added similarly -->
+    </section>
+
+    <section id="about-en" class="lang-content" aria-label="About (English)">
+      <h2>What is the Observatory</h2>
+      <p>The Hellenic Goldsmithing Observatory (HElGO) is an independent initiative that maps the contemporary landscape of Greek jewelry. We observe and document trends, structures, and long‑term dynamics in goldsmithing: from its historical trajectory, export footprint, and relationship with tourism, to shifts in education, the adoption of new technologies, and the evolving ways in which jewelry is designed, produced, and communicated today.</p>
+      <h3>Mission / Vision</h3>
+      <p>Our mission is to bring to light what is already unfolding in the field and to place it in the context of broader international dynamics...</p>
+      <!-- Add more English content as needed -->
+    </section>
+
+    <!-- Tab 3: Έρευνα & Δράσεις / Research & Activities -->
+    <section id="research-el" class="lang-content" aria-label="Έρευνα">
+      <h2>Έρευνα & Δράσεις</h2>
+      <p>Μελέτες / Studies (ελληνικά)</p>
+      <!-- Greek studies placeholder -->
+      <p>Δέσμευση και περιγραφές προγραμμάτων με συνδέσμους και εικόνες.</p>
+    </section>
+
+    <section id="research-en" class="lang-content" aria-label="Research">
+      <h2>Research & Activities</h2>
+      <p>Studies (English)</p>
+      <!-- English studies placeholder -->
+      <p>Links to studies, summaries and thumbnails can go here.</p>
+    </section>
+
+    <!-- Tab 4: Επαφές / Contact -->
+    <section id="contact-el" class="lang-content" aria-label="Επικοινωνία">
+      <h2>Επικοινωνία</h2>
+      <p>Email: info@example.org</p>
+      <p>Phone: +30 123 456 789</p>
+      <p>Social: @example</p>
+    </section>
+
+    <section id="contact-en" class="lang-content" aria-label="Contact">
+      <h2>Contact</h2>
+      <p>Email: info@example.org</p>
+      <p>Phone: +30 123 456 789</p>
+      <p>Social: @example</p>
+    </section>
+  </main>
+
+  <!-- Inline script (option A) to keep everything in one file -->
   <script>
-    function setLang(lang){
+    function setLang(lang) {
+      // Toggle visible language content sections
+      document.querySelectorAll('.lang-content').forEach(sec => sec.classList.remove('active'));
+      const activeSection = document.getElementById('lang-' + lang) || null;
+      // If using the "home-el" style sections, show the corresponding el/en sections
+      if (lang === 'el') {
+        document.getElementById('home-el').classList.add('active');
+        document.getElementById('about-el').classList.add('active');
+        document.getElementById('research-el').classList.add('active');
+        document.getElementById('contact-el').classList.add('active');
+      } else {
+        document.getElementById('home-en').classList.add('active');
+        document.getElementById('about-en').classList.add('active');
+        document.getElementById('research-en').classList.add('active');
+        document.getElementById('contact-en').classList.add('active');
+      }
+
+      // Update nav labels to English/Greek
       const labels = {
         el: ["Αρχική","Σχετικά","Έρευνα","Επικοινωνία"],
-        en: ["Home","About","Research","Contact us: Επαφές"]
+        en: ["Home","About","Research","Contact us: Επικοινωνία"]
       };
-      // Update nav labels
       document.querySelectorAll('#main-nav a').forEach((a, i) => {
-        a.textContent = labels[lang][i];
+        a.style.display = (lang === 'el' ? '' : 'none');
+        // For the EN items, ensure they are visible when EN is selected
+        if (a.getAttribute('data-lang') === 'en') {
+          a.style.display = (lang === 'en') ? '' : 'none';
+        }
+        // Update text accordingly for Greek items only
+        if (a.getAttribute('data-lang') === 'el') {
+          a.textContent = labels.el[i];
+        } else {
+          a.textContent = labels.en[i];
+        }
       });
+
       // Save preference
       localStorage.setItem('siteLang', lang);
     }
 
     // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
-      const lang = localStorage.getItem('siteLang') || 'el';
-      setLang(lang);
+      const saved = localStorage.getItem('siteLang') || 'el';
+      setLang(saved);
     });
   </script>
 </body>
