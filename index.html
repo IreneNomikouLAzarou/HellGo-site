@@ -1,27 +1,43 @@
 <!doctype html>
 <html lang="el">
-<head>
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
   <style>
-    :root { --color-primary: #0b1b2b; --color-green: #2e8b57; }
+    :root {
+      --color-primary: #0b1b2b;
+      --color-green: #2e8b57;
+    }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color: #111; background:#fff; }
-    header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.25rem; border-bottom:1px solid #eee; }
+
+    /* Bigger header area */
+    header { display:flex; align-items:center; justify-content:space-between;
+             padding:1.75rem 1.25rem; border-bottom:1px solid #eee; min-height: 88px; }
+
+    /* Brand/logo area (single, fixed size) */
     .brand { display:flex; align-items:center; gap:1rem; }
-    .brand img { height:40px; }
-    .brand-title { font-weight:700; font-size:1.1rem; }
+    .brand img { height:64px; width:auto; }
+
     .lang-switch { display:flex; gap:.5rem; }
-    .lang-switch button { padding:.4rem .8rem; border:1px solid #333; background:#fff; border-radius:6px; cursor:pointer; font-weight:700; }
-    nav.main-nav { display:flex; gap:1rem; padding:.5rem 1rem; border-bottom:1px solid #eee; }
-    nav.main-nav button { background:transparent; border:0; font-weight:700; cursor:pointer; padding:.25rem .5rem; }
+    .lang-switch button { padding:.6rem .9rem; border:1px solid #333; background:#fff;
+                           border-radius:6px; cursor:pointer; font-weight:700; }
+
+    /* Navigation */
+    nav.main-nav { display:flex; gap:1rem; padding:.75rem 1rem; border-bottom:1px solid #eee; }
+    nav.main-nav button { background:transparent; border:0; font-weight:700; cursor:pointer;
+                          padding:.25rem .5rem; }
+
     main { padding:1rem; }
-    .tab { display:none; }
-    .tab.active { display:block; }
-    .hero { display:flex; gap:2rem; align-items:center; margin:1rem 0; }
-    .hero img { width:100%; max-width:520px; height:auto; border-radius:6px; }
-    .cta { display:inline-block; background:var(--color-green); color:#fff; padding:.6rem 1rem; border-radius:6px; text-decoration:none; font-weight:700; margin-top:.6rem; }
+
+    /* Optional: bigger content area on wide screens for a "larger" look */
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* Simple responsive tweak */
+    @media (max-width: 800px) {
+      header { flex-direction: column; align-items: flex-start; padding: 1rem; }
+      .brand img { height: 56px; }
+      .container { padding: 0 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -81,7 +97,7 @@
           <p>Ένας χώρος έρευνας για το ελληνικό κόσμημα που χαρτογραφεί το σύστημα πολιτισμού, οικονομίας και τεχνικής εκπαίδευσης στην αργυροχρυσοχοΐα,σε διάλογο με τις διεθνείς και εγχώριες τάσεις.</p>
           <a class="cta" href="#about-el" onclick="openTab('about-el')">Μάθετε περισσότερα →</a>
         </div>
-        <img src="EPAK.jpg" alt="Κοσμήματα σε εργαστήριο" />
+        <img src="photo ergastirio 3.png" alt="Κοσμήματα σε εργαστήριο" />
       </div>
     </section>
 
