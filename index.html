@@ -37,9 +37,9 @@ html
       <span class="brand-title">Hellenic Goldsmithing Observatory</span>
     </div>
 
-    <div class="lang-switch" aria-label="Language switch">
-      <button type="button" id="btn-gr">GR</button>
-      <button type="button" id="btn-en">EN</button>
+     <div class="lang-switch" aria-label="Language switch">
+      <button type="button" onclick="setLang('el')">GR</button>
+      <button type="button" onclick="setLang('en')">EN</button>
     </div>
   </header>
 
@@ -51,9 +51,27 @@ html
     <a href="#contact">Επαφές</a>
   </nav>
 
-  <!-- Minimal content area (tab-ready containers can go here) -->
-  <main id="content" role="main">
-    <!-- Tab content goes here -->
-  </main>
+  
+  <!-- Language toggle script (end of body) -->
+  <script>
+    function setLang(lang){
+      const labels = {
+        el: ["Αρχική","Σχετικά","Έρευνα","Επικοινωνία"],
+        en: ["Home","About","Research","Contact us: Επαφές"]
+      };
+      // Update nav labels
+      document.querySelectorAll('#main-nav a').forEach((a, i) => {
+        a.textContent = labels[lang][i];
+      });
+      // Save preference
+      localStorage.setItem('siteLang', lang);
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const lang = localStorage.getItem('siteLang') || 'el';
+      setLang(lang);
+    });
+  </script>
 </body>
 </html>
