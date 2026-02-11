@@ -4,40 +4,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --color-primary: #0b1b2b;
-      --color-green: #2e8b57;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color: #111; background:#fff; }
+  --header-bg: #ffffff;
+  --text: #111;
+  --border: #eee;
+  --link: #111;
+}
 
-    /* Bigger header area */
-    header { display:flex; align-items:center; justify-content:space-between;
-             padding:1.75rem 1.25rem; border-bottom:1px solid #eee; min-height: 88px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
 
-    /* Brand/logo area (single, fixed size) */
-    .brand { display:flex; align-items:center; gap:1rem; }
-    .brand img { height:64px; width:auto; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: var(--text);
+  background: #fff;
+}
 
-    .lang-switch { display:flex; gap:.5rem; }
-    .lang-switch button { padding:.6rem .9rem; border:1px solid #333; background:#fff;
-                           border-radius:6px; cursor:pointer; font-weight:700; }
+/* Canonical header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  min-height: 88px;
+  background: var(--header-bg);
+}
 
-    /* Navigation */
-    nav.main-nav { display:flex; gap:1rem; padding:.75rem 1rem; border-bottom:1px solid #eee; }
-    nav.main-nav button { background:transparent; border:0; font-weight:700; cursor:pointer;
-                          padding:.25rem .5rem; }
+.site-header__brand { display: flex; align-items: center; gap: 1rem; }
+.site-header__logo { height: 64px; width: auto; }
 
-    main { padding:1rem; }
-
-    /* Optional: bigger content area on wide screens for a "larger" look */
-    .container { max-width: 1200px; margin: 0 auto; }
-
-    /* Simple responsive tweak */
-    @media (max-width: 800px) {
-      header { flex-direction: column; align-items: flex-start; padding: 1rem; }
-      .brand img { height: 56px; }
-      .container { padding: 0 1rem; }
-    }
+.site-header__nav { display: flex; gap: 1rem; }
+.site-header__nav-link {
+  background: transparent;
+  border: 0;
+  font-weight: 700;
+  padding: .25rem .5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+.site-header__lang { display: flex; gap: .5rem; }
+.site-header__lang-btn {
+  padding: .6rem .9rem;
+  border: 1px solid #333;
+  background: #fff;
+  border-radius: 6px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -80,7 +94,7 @@
     <button data-target="about-el" onclick="openTab('about-el')">Σχετικά</button>
     <button data-target="research-el" onclick="openTab('research-el')" style="display:none;">Έρευνα</button>
     <button data-target="contact-el" onclick="openTab('contact-el')" style="display:none;">Επικοινωνία</button>
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     <!-- Αγγλικά (κρυμμένα έως ότου επιλεγεί EN) -->
     <button data-target="home-en" onclick="openTab('home-en')" style="display:none;">Home</button>
     <button data-target="about-en" onclick="openTab('about-en')" style="display:none;">About</button>
