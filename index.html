@@ -11,60 +11,60 @@
 
     body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color: var(--text); background:#fff; }
 
-    .center-all {
-      text-align: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Patch: header left, language right; remove inner centering */
+    /* Header: logo left, language right, navigation centered below (or within header) */
     .site-header {
       display: flex;
       align-items: center;
-      justify-content: flex-start; /* keep row left-aligned */
+      justify-content: space-between; /* keep logo left, language right, space between */
       padding: 1.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
       min-height: 88px;
       background: var(--header-bg);
       text-align: left;
-      gap: 1rem;
     }
 
--    .site-header > .site-header__inner {
--      display: flex; align-items: center; gap: 1rem;
--      width: min(1200px, 100%);
--      justify-content: center;
--    }
-+    /* Removed inner centering wrapper to prevent logo from centering.
-+       If you have an inner wrapper, keep a simple one that does not center. */
-+    .site-header__inner {
-+      display: flex; align-items: center; gap: 1rem;
-+      width: min(1200px, 100%);
-+      justify-content: flex-start;
-+    }
+    .site-header__brand {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .site-header__logo { height: 48px; width: auto; }
 
-    .site-header__brand { display:flex; align-items:center; gap:1rem; }
-    .site-header__logo { height: 16px; width: auto; }
+    .site-header__lang { display:flex; gap:.5rem; }
+    .site-header__lang button {
+      padding:.6rem .9rem;
+      border:1px solid #0aa78c;
+      background:#fff;
+      border-radius:6px;
+      font-weight:700; color: var(--text);
+      cursor:pointer;
+    }
 
-    .site-header__nav { display:flex; gap:1rem; }
-    .site-header__nav-link { background:transparent; border:0; font-weight:700; padding:.25rem .5rem; cursor:pointer; color:var(--text); }
-
-    .site-header__lang { margin-left: auto; display:flex; gap:.5rem; }
-    .site-header__lang button { padding:.6rem .9rem; border:1px solid #0aa78c; background:#fff; border-radius:6px; font-weight:700; color: var(--text); cursor:pointer; }
-
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; text-align: center; }
-
-    main { padding: 1rem; }
+    /* Centered menu bar (below header, but visually centered) */
+    .main-nav {
+      display: flex;
+      justify-content: center; /* centers the menu */
+      gap: 1rem;
+      padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background:#fff;
+    }
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      padding:.25rem .5rem;
+      border-radius:6px;
+    }
 
     @media (max-width: 800px) {
       .site-header { padding: 1rem; }
-      .site-header__nav { display: none; }
+      .main-nav { flex-wrap: wrap; padding: .5rem 1rem; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Example header: brand on left, language on right (as siblings) -->
+
+  <!-- Header: logo left, language right -->
   <header class="site-header" aria-label="Site header">
     <div class="site-header__brand" aria-label="Branding">
       <img class="site-header__logo" src="EPAK.png" alt="Brand logo">
@@ -76,25 +76,36 @@
     </div>
   </header>
 
-  <!-- Rest of your page content -->
-  <nav class="site-header__nav" aria-label="Main navigation">
-    <a href="#" class="site-header__nav-link">Αρχική</a>
-    <a href="#" class="site-header__nav-link">Σχετικά</a>
-    <a href="#" class="site-header__nav-link">Έρευνα</a>
-    <a href="#" class="site-header__nav-link">Δράσεις</a>
-    <a href="#" class="site-header__nav-link">Επικοινωνία</a>
+  <!-- Centered navigation menu -->
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#">Αρχική</a>
+    <a href="#">Σχετικά</a>
+    <a href="#">Έρευνα</a>
+    <a href="#">Δράσεις</a>
+    <a href="#">Επικοινωνία</a>
   </nav>
 
-  <main>
+  <main id="content" class="container">
     <!-- Your page content -->
   </main>
 
   <script>
-    // Simple language switcher stub
+    // Language switcher: implement real logic here
     function setLang(lang) {
       console.log("Language set to:", lang);
-      // Implement your actual language switch logic here
+      // Example: store in localStorage and update UI text if needed
+      localStorage.setItem('siteLang', lang);
+      // If you have a multi-language content strategy, trigger it here
     }
+
+    // Optional: load previously selected language on page load
+    (function initLang() {
+      const lang = localStorage.getItem('siteLang');
+      if (lang) {
+        // apply language immediately if you have a mechanism
+        console.log("Loaded language:", lang);
+      }
+    })();
   </script>
 
 
