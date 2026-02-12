@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="el">
-<head>  
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
@@ -11,21 +11,18 @@
 
     body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color: var(--text); background:#fff; }
 
-    /* Header: logo left, language right, navigation centered below (or within header) */
+    /* Header: logo left, language right; navigation centered below */
     .site-header {
       display: flex;
       align-items: center;
-      justify-content: space-between; /* keep logo left, language right, space between */
+      justify-content: space-between;
       padding: 1.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
       min-height: 88px;
       background: var(--header-bg);
-      text-align: left;
     }
 
-    .site-header__brand {
-      display: flex; align-items: center; gap: 1rem;
-    }
+    .site-header__brand { display:flex; align-items:center; gap:1rem; }
     .site-header__logo { height: 48px; width: auto; }
 
     .site-header__lang { display:flex; gap:.5rem; }
@@ -34,34 +31,40 @@
       border:1px solid #0aa78c;
       background:#fff;
       border-radius:6px;
-      font-weight:700; color: var(--text);
+      font-weight:700;
+      color:var(--text);
       cursor:pointer;
     }
 
-    /* Centered menu bar (below header, but visually centered) */
+    /* Centered navigation bar below header */
     .main-nav {
-      display: flex;
-      justify-content: center; /* centers the menu */
-      gap: 1rem;
-      padding: .75rem 1rem;
-      border-bottom: 1px solid var(--border);
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      padding:.75rem 1rem;
+      border-bottom:1px solid var(--border);
       background:#fff;
     }
-    .main-nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700;
+    .main-nav a, .main-nav button {
+      text-decoration:none;
+      color:var(--text);
+      font-weight:700;
       padding:.25rem .5rem;
       border-radius:6px;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     @media (max-width: 800px) {
       .site-header { padding: 1rem; }
       .main-nav { flex-wrap: wrap; padding: .5rem 1rem; }
     }
+
+    /* Simple page container */
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; text-align: left; }
   </style>
 </head>
-
 <body>
 
   <!-- Header: logo left, language right -->
@@ -76,13 +79,23 @@
     </div>
   </header>
 
-  <!-- Centered navigation menu -->
-  <nav class="main-nav" aria-label="Main navigation">
-    <a href="#">Αρχική</a>
-    <a href="#">Σχετικά</a>
-    <a href="#">Έρευνα</a>
-    <a href="#">Δράσεις</a>
-    <a href="#">Επικοινωνία</a>
+  <!-- Centered navigation bar; Greek items shown by default -->
+  <nav class="main-nav" aria-label="Main navigation" id="main-nav">
+    <span class="lang-aware Greek-menu">
+      <a href="#" data-lang="el" onclick="openTab('home-el')">Αρχική</a>
+      <a href="#" data-lang="el" onclick="openTab('about-el')">Σχετικά</a>
+      <a href="#" data-lang="el" onclick="openTab('research-el')">Έρευνα</a>
+      <a href="#" data-lang="el" onclick="openTab('actions-el')">Δράσεις</a>
+      <a href="#" data-lang="el" onclick="openTab('contact-el')">Επικοινωνία</a>
+    </span>
+
+    <span class="lang-aware English-menu" style="display:none;">
+      <a href="#" data-lang="en" onclick="openTab('home-en')">Home</a>
+      <a href="#" data-lang="en" onclick="openTab('about-en')">About</a>
+      <a href="#" data-lang="en" onclick="openTab('research-en')">Research</a>
+      <a href="#" data-lang="en" onclick="openTab('actions-en')">Activities</a>
+      <a href="#" data-lang="en" onclick="openTab('contact-en')">Contact</a>
+    </span>
   </nav>
 
   <main id="content" class="container">
@@ -90,53 +103,34 @@
   </main>
 
   <script>
-    // Language switcher: implement real logic here
+    // Simple language switcher: show Greek menu by default, switch to English
     function setLang(lang) {
       console.log("Language set to:", lang);
-      // Example: store in localStorage and update UI text if needed
       localStorage.setItem('siteLang', lang);
-      // If you have a multi-language content strategy, trigger it here
+      // Toggle menus
+      const greek = document.querySelectorAll('.lang-aware.Greek-menu')[0];
+      const english = document.querySelectorAll('.lang-aware.English-menu')[0];
+      if (lang === 'gr') {
+        greek.style.display = 'inline';
+        english.style.display = 'none';
+      } else {
+        greek.style.display = 'none';
+        english.style.display = 'inline';
+      }
+      // Optional: update the actual content sections here
     }
 
-    // Optional: load previously selected language on page load
+    // Initialize on load
     (function initLang() {
-      const lang = localStorage.getItem('siteLang');
-      if (lang) {
-        // apply language immediately if you have a mechanism
-        console.log("Loaded language:", lang);
-      }
+      const lang = localStorage.getItem('siteLang') || 'gr';
+      setLang(lang);
     })();
-  </script>
 
-
-
-<body>
-
-<div class="center-all">
-  <header class="site-header" aria-label="Site header">
-    <div class="brand" aria-label="Branding">
-      <img id="brandLogo" src="EPAK.png" alt="Brand logo" style="height: 80px; width: auto;">
-    </div>
-    <div class="lang-switch" aria-label="Language switch">
-      <button onclick="setLang('el')">GR</button>
-      <button onclick="setLang('en')">EN</button>
-    </div>
-  </header>
-
-  <nav class="main-nav" aria-label="Main navigation" id="main-nav">
-    <button data-target="home-el" onclick="openTab('home-el')">Αρχική</button>
-    <button data-target="about-el" onclick="openTab('about-el')">Σχετικά</button>
-    <button data-target="research-el" onclick="openTab('research-el')" style="display:none;">Έρευνα</button>
-    <button data-target="research-el" onclick="openTab('research-el')" style="display:none;">Δράσεις</button>
-    <button data-target="contact-el" onclick="openTab('contact-el')" style="display:none;">Επικοινωνία</button>
-
-    <button data-target="home-en" onclick="openTab('home-en')" style="display:none;">Home</button>
-    <button data-target="about-en" onclick="openTab('about-en')" style="display:none;">About</button>
-    <button data-target="research-en" onclick="openTab('research-en')" style="display:none;">Research</button>
-    <button data-target="research-en" onclick="openTab('research-en')" style="display:none;">Activities</button>
-    <button data-target="contact-en" onclick="openTab('contact-en')" style="display:none;">Contact</button>
-  </nav>
-
+    // Placeholder for tab switching
+    function openTab(id) {
+      console.log("Open tab:", id);
+      // Implement your tab switching logic
+      const tabs = document.querySelectorAll('.tab');
 
   <main id="content" class="container">
     <!-- Home el (Default) -->
