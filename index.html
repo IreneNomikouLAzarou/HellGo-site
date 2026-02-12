@@ -104,10 +104,10 @@
       <div class="hero">
         <div>
           <h1>ΕΛΛΗΝΙΚΟ ΠΑΡΑΤΗΡΗΤΗΡΙΟ ΑΡΓΥΡΟΧΡΥΣΟΧΟΪΑΣ ΚΑΙ ΚΟΣΜΗΜΑΤΟΠΟΙΙΑΣ</h1>
-          <p>Ένας χώρος έρευνας για το ελληνικό κόσμημα που χαρτογραφεί το σύστημα πολιτισμού, οικονομίας και τεχνικής εκπαίδευσης στην αργυροχρυσοχοΐα,σε διάλογο με τις διεθνείς και εγχώριες τάσεις.</p>
-          <a class="cta" href="#about-el" onclick="openTab('about-el')"
+          <p>Ένας χώρος έρευνας για το ελληνικό κόσμημα που χαρτογραφεί το σύστημα πολιτισμού, οικονομίας και τεχνικής εκπαίδευσης στην αργυροχρυσοχοΐα, σε διάλογο με τις διεθνείς και εγχώριες τάσεις.</p>
+          <button class="cta" onclick="openTab('about-el')">Περισσοτερα</button>
         </div>
-        <img src="photo ergastirio 6.png" alt="Κοσμήματα σε εργαστήριο" />
+        <img src="photo ergastirio 6.png" alt="Κοσμήματα σε εργαστήριο" style="max-width:300px; height:auto; display:block;"/>
       </div>
     </section>
 
@@ -145,21 +145,36 @@
            </div>
      </div>
 
-    <!-- Studies / Μελέτες (placeholder) -->
+    <!-- Έρευνα -->
       <section id="research-el" class="tab" aria-label="Έρευνα Ελληνικά" style="display:none;">
          <h2>Μελέτη 2027</h2>
-         <p> Σύντομη Περιγραφή - link</p>     
-    </section> 
+         <p> Σύντομη Περιγραφή - link (αναμένεται ανακοίνωση)/p>     
+     </section> 
+
+    <!-- Δράσεις -->
+      <section id="activities-el" class="tab" aria-label="Δράσεις Ελληνικά" style="display:none;">
+         <h2>Συνεντευξεις</h2>
+         <p> Σύντομη Περιγραφή - (αναμένεται ανακοίνωση)/p>     
+      </section>
     
+    <!-- Επικοινωνία -->
+      <section id="contact-el" class="tab" aria-label="Επικοινωνία Ελληνικά" style="display:none;">
+         <h2>Email</h2>
+         <p> info@hellenic-goldsmithing-observatory.eu/p>
+
+         <h2>Social Media</h2>
+         <p> Linked In </p>                        
+       </section>
+
     <!-- Home en -->
     <section id="home-en" class="tab" aria-label="Home English" style="display:none;">
       <div class="hero">
         <div>
           <h1>HELLENIC GOLDSMITHING OBSERVATORY</h1>
           <p>A research space dedicated to Greek jewelry that maps the interconnected system of culture, the economy, and technical education in silversmithing and goldsmithing, in dialogue with international and local trends.</p>
-          <a class="cta" href="#about-en" onclick="openTab('about-en')"
+          <button class="cta" onclick="openTab('about-en')">More Info</button>
         </div>
-        <img src="photo ergastirio 6.png" alt="Jewelry in studio" />
+        <img src="photo ergastirio 6.png" alt="photo ergastirio" style="max-width:300px; height:auto; display:block;"/>
       </div>
     </section>
 
@@ -176,7 +191,7 @@
       <div class="member">
            <img src="irene.png" alt="Irene Nomikou-Lazarou">
            <div>
-               <h3>Irene Nomikou-Lazarou – Researcher and Research Coordinator</h3>
+               <h3>Irene Nomikou-Lazarou - Researcher and Research Coordinator</h3>
                <p>She holds a degree in Economic and Regional Development from Panteion University, as well as two Master’s degrees: in Economic Theory (Athens University of Economics and Business) and in Data Science (The American College of Greece). She is a Fulbright Research Scholar at Columbia University, USA (National Center for Disaster Preparedness – Climate School, 2024–2025). She is currently a PhD Candidate at the Department of Economics of the Athens University of Economics and Business, where her research focuses on climate risk and catastrophic natural events, with an emphasis on their impacts on the insurance and financial sectors. Since 2022, she has been working as a researcher at the Foundation for Economic and Industrial Research (IOBE) on sectoral studies related to the green transition and entrepreneurship, environmental sustainability, regional development, climate risk in the financial system, and housing policy. She holds a diploma in goldsmithing and jewelry making from the Public Vocational School of Goldsmithing in Athens (2012–2014), an institution with a long-standing tradition in the field. She has gained practical experience through collaborations with jewelry workshops, as well as participation in group and solo exhibitions.</p>
            <div>
       <div>
@@ -199,9 +214,32 @@
 
     </section>
 
+      <!-- Research / -->
+      <section id="research-en" class="tab" aria-label="Research English" style="display:none;">
+         <h2>Study 2027</h2>
+         <p> Short Description - link (to be announced)</p>     
+    </section> 
+
+    <!-- Activities -->
+      <section id="activities-en" class="tab" aria-label="Activities English" style="display:none;">
+         <h2>Interviews</h2>
+         <p> Short Description - (to be announced)</p>     
+    </section>
+
+    <!-- Contact -->
+      <section id="contact-en" class="tab" aria-label="Contact English" style="display:none;">
+         <h2>Email</h2>
+         <p> info@hellenic-goldsmithing-observatory.eu/p>
+
+         <h2>Social Media</h2>
+         <p> Linked In </p>                        
+       </section>
+    
+
+
   </main>
 
-<script>
+  <script>
   // Optional: keep an openTab(id) helper if you use it elsewhere
   function openTab(targetId) {
     document.querySelectorAll('[id$="-el"], [id$="-en"]').forEach(sec => {
