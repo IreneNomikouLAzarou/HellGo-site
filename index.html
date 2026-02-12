@@ -74,7 +74,7 @@
     </div>
 
     <div class="site-header__lang" aria-label="Language switch">
-      <button onclick="setLang('gr')">GR</button>
+      <button onclick="setLang('el')">GR</button>
       <button onclick="setLang('en')">EN</button>
     </div>
   </header>
@@ -210,7 +210,7 @@
     // Show/hide language-specific navigation
     const greekNav = document.querySelectorAll('.Greek-menu');
     const englishNav = document.querySelectorAll('.English-menu');
-    if (lang === 'gr') {
+    if (lang === 'el') {
       greekNav.forEach(n => n.style.display = 'inline-block');
       englishNav.forEach(n => n.style.display = 'none');
       // Greek content only
@@ -228,10 +228,10 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('siteLang') || 'gr';
+    const saved = localStorage.getItem('siteLang') || 'el';
     setLang(saved);
     // Open initial tab for the chosen language (optional)
-    const defaultId = saved === 'gr' ? 'home-el' : 'home-en';
+    const defaultId = saved === 'el' ? 'home-el' : 'home-en';
     const t = document.getElementById(defaultId);
     if (t) t.style.display = 'block';
   });
