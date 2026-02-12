@@ -17,22 +17,31 @@
       margin: 0 auto;
     }
 
+    /* Patch: header left, language right; remove inner centering */
     .site-header {
       display: flex;
       align-items: center;
-      justify-content: flex-start; /* changed from center */;
+      justify-content: flex-start; /* keep row left-aligned */
       padding: 1.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
       min-height: 88px;
       background: var(--header-bg);
       text-align: left;
+      gap: 1rem;
     }
 
-    .site-header > .site-header__inner {
-      display: flex; align-items: center; gap: 1rem;
-      width: min(1200px, 100%);
-      justify-content: center;
-    }
+-    .site-header > .site-header__inner {
+-      display: flex; align-items: center; gap: 1rem;
+-      width: min(1200px, 100%);
+-      justify-content: center;
+-    }
++    /* Removed inner centering wrapper to prevent logo from centering.
++       If you have an inner wrapper, keep a simple one that does not center. */
++    .site-header__inner {
++      display: flex; align-items: center; gap: 1rem;
++      width: min(1200px, 100%);
++      justify-content: flex-start;
++    }
 
     .site-header__brand { display:flex; align-items:center; gap:1rem; }
     .site-header__logo { height: 16px; width: auto; }
@@ -53,6 +62,39 @@
     }
   </style>
 </head>
+
+<body>
+  <!-- Example header: brand on left, language on right (as siblings) -->
+  <header class="site-header" aria-label="Site header">
+    <div class="site-header__brand" aria-label="Branding">
+      <img class="site-header__logo" src="EPAK.png" alt="Brand logo">
+    </div>
+
+    <div class="site-header__lang" aria-label="Language switch">
+      <button onclick="setLang('gr')">GR</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <!-- Rest of your page content -->
+  <nav class="site-header__nav" aria-label="Main navigation">
+    <a href="#" class="site-header__nav-link">Αρχική</a>
+    <a href="#" class="site-header__nav-link">Σχετικά</a>
+    <a href="#" class="site-header__nav-link">Έρευνα</a>
+    <a href="#" class="site-header__nav-link">Επικοινωνία</a>
+  </nav>
+
+  <main>
+    <!-- Your page content -->
+  </main>
+
+  <script>
+    // Simple language switcher stub
+    function setLang(lang) {
+      console.log("Language set to:", lang);
+      // Implement your actual language switch logic here
+    }
+  </script>
 
 
 
