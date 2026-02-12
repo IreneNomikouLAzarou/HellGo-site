@@ -202,62 +202,39 @@
   </main>
 
   <script>
-    // Minimal, safe language toggle that preserves all text content
-    // Assumes your Greek sections end with "-el" and English sections end with "-en"
+  // Enforce a single-language view: show either Greek (-el) or English (-en) content only
+  function setLang(lang) {
+    // Persist choice
+    localStorage.setItem('siteLang', lang);
 
-    function showOnly(ids) {
-      // hide all known tab sections
-      document.querySelectorAll('.tab').forEach(sec => sec.style.display = 'none');
-      ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'block';
+    // Show/hide language-specific navigation
+    const greekNav = document.querySelectorAll('.Greek-menu');
+    const englishNav = document.querySelectorAll('.English-menu');
+    if (lang === 'gr') {
+      greekNav.forEach(n => n.style.display = 'inline-block');
+      englishNav.forEach(n => n.style.display = 'none');
+      // Greek content only
+      document.querySelectorAll('[id^="home-"], [id^="about-"], [id^="research-"], [id^="actions-"], [id^="contact-"]').forEach(sec => {
+        sec.style.display = sec.id.endsWith('-el') ? 'block' : 'none';
+      });
+    } else {
+      // English content only
+      greekNav.forEach(n => n.style.display = 'none');
+      englishNav.forEach(n => n.style.display = 'inline-block');
+      document.querySelectorAll('[id^="home-"], [id^="about-"], [id^="research-"], [id^="actions-"], [id^="contact-"]').forEach(sec => {
+        sec.style.display = sec.id.endsWith('-en') ? 'block' : 'none';
       });
     }
+  }
 
-    function openTab(targetId) {
-      // If the target exists, show only that tab
-      const t = document.getElementById(targetId);
-      if (t) {
-        // hide all content sections, then show target
-        showOnly([targetId]);
-        history.replaceState(null, '', '#' + targetId);
-      }
-    }
-
-    function setLang(lang) {
-      // Persist language choice
-      localStorage.setItem('siteLang', lang);
-
-      // Show Greek or English navigation items without touching any text blocks
-      const greekNav = document.querySelectorAll('.Greek-menu');
-      const englishNav = document.querySelectorAll('.English-menu');
-      if (lang === 'gr') {
-        greekNav.forEach(n => n.style.display = 'inline-block');
-        englishNav.forEach(n => n.style.display = 'none');
-        // Show Greek content blocks, hide English content blocks
-        document.querySelectorAll('[id^="home-"], [id^="about-"], [id^="research-"], [id^="actions-"], [id^="contact-"]').forEach(sec => {
-          if (sec.id.endsWith('-el')) sec.style.display = 'block';
-          else if (sec.id.endsWith('-en')) sec.style.display = 'none';
-        });
-      } else {
-        // EN
-        greekNav.forEach(n => n.style.display = 'none');
-        englishNav.forEach(n => n.style.display = 'inline-block');
-        document.querySelectorAll('[id^="home-"], [id^="about-"], [id^="research-"], [id^="actions-"], [id^="contact-"]').forEach(sec => {
-          if (sec.id.endsWith('-en')) sec.style.display = 'block';
-          else if (sec.id.endsWith('-el')) sec.style.display = 'none';
-        });
-      }
-    }
-
-    // Initialize on load without altering content
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('siteLang') || 'gr';
-      // Ensure proper initial display
-      setLang(saved);
-      // Open a default tab for the language
-      openTab(saved === 'gr' ? 'home-el' : 'home-en');
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('siteLang') || 'gr';
+    setLang(saved);
+    // Open initial tab for the chosen language (optional)
+    const defaultId = saved === 'gr' ? 'home-el' : 'home-en';
+    const t = document.getElementById(defaultId);
+    if (t) t.style.display = 'block';
+  });
+</script>
 </body>
 </html>
