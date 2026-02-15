@@ -80,6 +80,45 @@
     </div>
   </header>
 
+  <script>
+  // java snipet to change logo per language 
+    const logos = {
+    el: { src: 'EPAK.png', alt: 'ΕΠΑΚ logo' },
+    en: { src: '"HelGO.png', alt: 'HelGO logo' }
+  };
+
+  // Optional: keep Greek/English menus in sync
+  function showHideMenus(lang) {
+    const greek = document.querySelector('.Greek-menu');
+    const english = document.querySelector('.English-menu');
+    if (greek && english) {
+      greek.style.display = (lang === 'el') ? 'inline' : 'none';
+      english.style.display = (lang === 'en') ? 'inline' : 'none';
+    }
+  }
+
+  function setLang(lang) {
+    if (!logos[lang]) return;
+    // Swap logo
+    const logo = document.getElementById('brand-logo');
+    if (logo) {
+      logo.src = logos[lang].src;
+      logo.alt = logos[lang].alt;
+    }
+    // Optional: swap menus
+    showHideMenus(lang);
+  }
+
+  // Initialize to Greek by default
+  document.addEventListener('DOMContentLoaded', () => setLang('el'));
+</script>
+
+
+
+
+
+  
+
   <!-- Centered navigation bar; Greek items shown by default -->
   <nav class="main-nav" aria-label="Main navigation" id="main-nav">
     <span class="lang-aware Greek-menu">
